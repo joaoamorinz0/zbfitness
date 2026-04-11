@@ -3,7 +3,7 @@ export const data = {
   slogan: "Um novo conceito de academia em Valparaíso",
 
   contato: {
-    whatsapp: "5561815555885",
+    whatsapp: "5561981555885",
     instagram: "academiazbfitness"
   },
 
