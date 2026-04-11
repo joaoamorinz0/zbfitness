@@ -115,12 +115,12 @@ function App() {
         
         <div className="absolute inset-0 bg-black/70" />
         
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent drop-shadow-2xl">
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto w-full md:max-w-5xl lg:max-w-6xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent drop-shadow-2xl leading-tight">
             TREINE COMO UM ATLETA DE VERDADE
           </h1>
-          <h2 className="text-2xl md:text-3xl mb-8">{data.slogan}</h2>
-          <p className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-8 font-semibold">{data.slogan}</h2>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-12 max-w-3xl mx-auto font-medium">
             Estrutura completa em {data.localizacao.cidade}
           </p>
           <p className="text-3xl md:text-4xl font-black text-blue-400 mb-12 font-display">
