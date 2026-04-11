@@ -77,15 +77,15 @@ function App() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden fixed inset-0 z-40 bg-neutral-950/95 backdrop-blur-sm transition-all duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-          <div className="flex flex-col h-full pt-20 px-8 gap-8">
-            <button onClick={toggleMobile} className="self-end p-2 card rounded-lg">
+        <div className={`md:hidden fixed inset-0 z-40 glass-navbar transition-all duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className="flex flex-col h-full pt-20 px-8 gap-8 items-start justify-center">
+<button onClick={toggleMobile} className="self-end p-2 glass-navbar rounded-lg mb-4">
               <X className="w-6 h-6 icon-blue" />
             </button>
-            <button onClick={() => scrollToSection('home')} className="text-2xl font-bold hover:text-blue-400 transition-colors py-2">Início</button>
-            <button onClick={() => scrollToSection('planos')} className="text-2xl font-bold hover:text-blue-400 transition-colors py-2">Planos</button>
-            <button onClick={() => scrollToSection('contato')} className="text-2xl font-bold hover:text-blue-400 transition-colors py-2">Contato</button>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-primary self-start">Falar no WhatsApp</a>
+            <button onClick={() => scrollToSection('home')} className="mobile-menu-item">Início</button>
+            <button onClick={() => scrollToSection('planos')} className="mobile-menu-item">Planos</button>
+            <button onClick={() => scrollToSection('contato')} className="mobile-menu-item">Contato</button>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mobile-menu-whatsapp">Falar no WhatsApp</a>
           </div>
         </div>
       </nav>
