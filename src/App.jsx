@@ -116,7 +116,6 @@ function App() {
         <div className="absolute inset-0 bg-black/70" />
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <img src={data.logo} alt={data.nome} className="mx-auto h-24 w-auto mb-8 shadow-2xl rounded-2xl" />
           <h1 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent drop-shadow-2xl">
             TREINE COMO UM ATLETA DE VERDADE
           </h1>
