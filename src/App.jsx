@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { data } from './data.js'
-import { Activity, Zap, StretchHorizontal, Music, Leaf, Radio, MapPin, Phone, Clock, Send, Check } from 'lucide-react'
+import { Activity, Zap, StretchHorizontal, Music, Leaf, Radio, MapPin, Phone, Clock, Send, Check, X } from 'lucide-react'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   // Dynamic icons map
   const iconMap = {
@@ -20,7 +21,10 @@ function App() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
+    setMobileOpen(false)
   }
+
+  const toggleMobile = () => setMobileOpen(!mobileOpen)
 
   const whatsappUrl = `https://wa.me/55${data.contato.whatsapp}`
 
@@ -65,17 +69,30 @@ function App() {
           </div>
 
           {/* Mobile menu button */}
-          <button className="md:hidden card p-2 rounded-lg">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button onClick={toggleMobile} className="md:hidden card p-2 rounded-lg">
+            <svg className={`w-6 h-6 transition-transform ${mobileOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className={`md:hidden fixed inset-0 z-40 bg-neutral-950/95 backdrop-blur-sm transition-all duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className="flex flex-col h-full pt-20 px-8 gap-8">
+            <button onClick={toggleMobile} className="self-end p-2 card rounded-lg">
+              <X className="w-6 h-6 icon-blue" />
+            </button>
+            <button onClick={() => scrollToSection('home')} className="text-2xl font-bold hover:text-blue-400 transition-colors py-2">Início</button>
+            <button onClick={() => scrollToSection('planos')} className="text-2xl font-bold hover:text-blue-400 transition-colors py-2">Planos</button>
+            <button onClick={() => scrollToSection('contato')} className="text-2xl font-bold hover:text-blue-400 transition-colors py-2">Contato</button>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-primary self-start">Falar no WhatsApp</a>
+          </div>
         </div>
       </nav>
 
       {/* Hero */}
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed" 
-        style={{backgroundImage: "url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"}}>
+        style={{backgroundImage: "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"}}>
         
         <div className="absolute inset-0 bg-black/70" />
         
@@ -94,7 +111,7 @@ function App() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" 
               className="btn-primary text-xl py-4 px-10 text-lg max-w-sm mx-auto sm:mx-0 shadow-2xl hover:shadow-2xl hover:-translate-y-1">
-              <Phone className="inline w-6 h-6 mr-2" /> Falar no WhatsApp
+              <Phone className="inline w-6 h-6 mr-2 icon-blue" /> Falar no WhatsApp
             </a>
             <button onClick={() => scrollToSection('planos')} 
               className="btn-primary text-xl font-semibold py-4 px-10 shadow-xl hover:shadow-2xl hover:-translate-y-1 bg-neutral-800 hover:bg-neutral-700 border-neutral-700">
@@ -237,14 +254,14 @@ function App() {
       <section id="contato" className="section-padding bg-gradient-to-t from-neutral-950 to-black">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-black mb-8">Pronto para transformar seu corpo?</h2>
-          <p className="text-xl opacity-90 mb-12 max-w-lg mx-auto">Fale conosco agora mesmo e comece sua jornada conosco</p>
+          <p className="text-xl opacity-90 mb-12 max-w-lg mx-auto">Fale conosco agora mesmo e comece sua jornada.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" 
               className="btn-primary px-12 py-6 text-2xl rounded-2xl shadow-2xl hover:shadow-2xl hover:-translate-y-2 bg-blue-600 hover:bg-blue-500 text-white max-w-sm mx-auto sm:mx-0">
-              <Phone className="inline w-8 h-8 mr-3 mb-1 icon-blue" /> Falar no WhatsApp Agora
+              <Phone className="inline w-8 h-8 mr-3 mb-1 icon-blue" /> Fale no WhatsApp Agora
             </a>
           </div>
-          <p className="mt-12 opacity-70 text-sm font-medium">© 2024 {data.nome}. Todos os direitos reservados.</p>
+          <p className="mt-12 opacity-70 text-sm font-medium">© 2026 João Amorim. Todos os direitos reservados.</p>
         </div>
       </section>
 
@@ -278,4 +295,3 @@ function App() {
 }
 
 export default App
-
