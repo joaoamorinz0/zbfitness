@@ -284,8 +284,8 @@ function App() {
         </div>
       </section>
 
-      {/* WhatsApp Floating Button */}
-      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-whatsapp" title="Falar no WhatsApp">
+      {/* WhatsApp Floating Button - Hidden on mobile */}
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-whatsapp hidden md:flex" title="Falar no WhatsApp">
         <Phone className="w-6 h-6" />
         <span>WhatsApp</span>
       </a>
