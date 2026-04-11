@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { data } from './data.js'
-import { Activity, Zap, StretchHorizontal, Music, Leaf, Radio, MapPin, Phone, Clock, Send, Check, X } from 'lucide-react'
+import { Activity, Zap, StretchHorizontal, Music, Leaf, Radio, MapPin, Phone, Clock, Send, Check, Menu, X } from 'lucide-react'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   // Dynamic icons map
   const iconMap = {
@@ -21,10 +21,12 @@ function App() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
-    setMobileOpen(false)
+    setMenuOpen(false)
   }
 
-  const toggleMobile = () => setMobileOpen(!mobileOpen)
+  const toggleMenu = () => setMenuOpen(!menuOpen)
+
+  const closeMenu = () => setMenuOpen(false)
 
   const whatsappUrl = `https://wa.me/55${data.contato.whatsapp}`
 
@@ -61,6 +63,7 @@ function App() {
             </div>
           </div>
           
+          {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             <button onClick={() => scrollToSection('home')} className={activeSection === 'home' ? 'text-blue-400 font-semibold border-b-2 border-blue-400 pb-1' : 'hover:text-blue-400 transition-colors font-medium'}>Início</button>
             <button onClick={() => scrollToSection('planos')} className={activeSection === 'planos' ? 'text-blue-400 font-semibold border-b-2 border-blue-400 pb-1' : 'hover:text-blue-400 transition-colors font-medium'}>Planos</button>
@@ -68,27 +71,43 @@ function App() {
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-primary text-white px-6 py-2 font-semibold">Falar no WhatsApp</a>
           </div>
 
-          {/* Mobile menu button */}
-          <button onClick={toggleMobile} className="md:hidden card p-2 rounded-lg">
-            <svg className={`w-6 h-6 transition-transform ${mobileOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+          {/* Mobile Menu Button */}
+          <button onClick={toggleMenu} className="md:hidden p-2 rounded-lg glass-navbar">
+            {menuOpen ? <X className="w-6 h-6 icon-blue" /> : <Menu className="w-6 h-6 icon-blue" />}
           </button>
         </div>
-
-        {/* Mobile Menu */}
-        <div className={`md:hidden fixed inset-0 z-40 glass-navbar transition-all duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-          <div className="flex flex-col h-full pt-20 px-8 gap-8 items-start justify-center">
-<button onClick={toggleMobile} className="self-end p-2 glass-navbar rounded-lg mb-4">
-              <X className="w-6 h-6 icon-blue" />
-            </button>
-            <button onClick={() => scrollToSection('home')} className="mobile-menu-item">Início</button>
-            <button onClick={() => scrollToSection('planos')} className="mobile-menu-item">Planos</button>
-            <button onClick={() => scrollToSection('contato')} className="mobile-menu-item">Contato</button>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mobile-menu-whatsapp">Falar no WhatsApp</a>
-          </div>
-        </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      {menuOpen && (
+        <>
+          {/* Backdrop Overlay */}
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden" onClick={closeMenu} />
+          
+          {/* Mobile Menu Panel */}
+          <div className="fixed top-20 left-0 right-0 z-50 md:hidden glass-navbar mx-4 rounded-xl shadow-2xl transform transition-all duration-300 translate-y-0">
+            <div className="py-4">
+              <button onClick={closeMenu} className="w-full flex items-center gap-3 p-4 rounded-xl hover:bg-white/5 transition-all mb-2">
+                <X className="w-5 h-5 icon-blue flex-shrink-0" />
+                <span className="font-semibold">Fechar</span>
+              </button>
+              
+              <button onClick={() => scrollToSection('home')} className="w-full text-left py-4 px-6 font-bold text-lg border-b border-white/10 hover:bg-white/5 transition-all duration-300 block">
+                Início
+              </button>
+              <button onClick={() => scrollToSection('planos')} className="w-full text-left py-4 px-6 font-bold text-lg border-b border-white/10 hover:bg-white/5 transition-all duration-300 block">
+                Planos
+              </button>
+              <button onClick={() => scrollToSection('contato')} className="w-full text-left py-4 px-6 font-bold text-lg border-b border-white/10 hover:bg-white/5 transition-all duration-300 block">
+                Contato
+              </button>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full block bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 text-lg rounded-lg mt-4 shadow-lg hover:shadow-xl transition-all duration-300 text-center border border-blue-600">
+                Falar no WhatsApp
+              </a>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Hero */}
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed" 
